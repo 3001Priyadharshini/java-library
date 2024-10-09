@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class LibraryManagement {
+    public static void main(String[] args) {
+        Library library = new Library();
+        Scanner scanner = new Scanner(System.in);
+
+        // Sample data
+        Book book1 = new Book("Harry Potter", "J.K. Rowling", "123");
+        Book book2 = new Book("The Hobbit", "J.R.R. Tolkien", "456");
+        library.addBook(book1);
+        library.addBook(book2);
+
+        LibraryMember member1 = new LibraryMember("M001", "Alice");
+        LibraryMember member2 = new LibraryMember("M002", "Bob");
+        library.addMember(member1);
+        library.addMember(member2);
+
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("\nLibrary Management System:");
+            System.out.println("1. Display Available Books");
+            System.out.println("2. Issue Book");
+            System.out.println("3. Return Book");
+            System.out.println("4. Display Issued Books");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    library.displayAvailableBooks();
+                    break;
+                case 2:
+                    System.out.print("Enter ISBN to issue: ");
+                    String isbnIssue = scanner.next();
+                    System.out.print("Enter Member ID: ");
+                    String memberId = scanner.next();
+                    library.issueBook(isbnIssue, memberId);
+                    break;
+                case 3:
+                    System.out.print("Enter ISBN to return: ");
+                    String isbnReturn = scanner.next();
+                    library.returnBook(isbnReturn);
+                    break;
+                case 4:
+                    library.displayIssuedBooks();
+                    break;
+                case 5:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+        scanner.close();
+    }
+}
